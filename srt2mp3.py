@@ -1,10 +1,7 @@
-
+import locale
 import sys
 import re
-
-
 from gtts import gTTS
-
 import os
 
 class Subtitle:
@@ -97,7 +94,7 @@ def time_to_milliseconds(time_str):
 
 
 
-def subtitle2mp3(subtitle):
+def subtitle2mp3(subtitle,lang):
     """
     Convert subtitle text to MP3 audio and return the file path.
 
@@ -111,7 +108,7 @@ def subtitle2mp3(subtitle):
     mp3_filename = f"Temp_{subtitle.line_number}.mp3"
 
     # Converti il testo del sottotitolo in MP3
-    tts = gTTS(text=subtitle.text, lang='it')
+    tts = gTTS(text=subtitle.text, lang=lang)
 
     # Salva il file MP3
     tts.save(mp3_filename)
@@ -202,33 +199,37 @@ def inserisci_audio(input_video, input_audio, output_video):
 
 def show_help():
     help_text = """
-    Usage: python srt2mp3.py [options] <input_file.srt> <input_file.mp4>
+Usage: python srt2mp3.py [options] <input_file.srt> <input_file.mp4>
 
     Options:
     -h, --help            Show this help message and exit.
-    -M, --merge           Merge the generated audio track with the input video.
+    -m, --merge           Merge the generated audio track with the input video.
+    -xx, --language xx    Specify the language code for subtitle-to-audio conversion using GTTS.
+                          Replace 'xx' with the desired language code.
 
     Arguments:
     <input_file.srt>      The subtitle file in SRT format.
-    <input_file.mp4>      The input video file in MP4 format.
+    <input_file.mp4>      The input video file in MP4 format to merge with the MP3 output.
 
     Description:
-    This program processes an SRT subtitle file to generate corresponding 
-    audio tracks, and optionally merges these audio tracks with an MP4 video file.
+    This program processes an SRT subtitle file to generate corresponding audio tracks, 
+    and optionally merges these audio tracks with an MP4 video file.
 
     Steps:
     1. Provide the SRT file and the MP4 video file as arguments.
-    2. The program will generate silent audio files for the durations between 
-       subtitle entries.
-    3. The program will convert subtitle text to audio and adjust the duration.
-    4. All generated audio files will be concatenated into a single MP3 file.
-    5. If the --merge option is provided, the final MP3 file will be merged 
+    2. Optionally, specify the language code for subtitle-to-audio conversion.
+    3. The program will generate silent audio files for the durations between subtitle entries.
+    4. The program will convert subtitle text to audio and adjust the duration.
+    5. All generated audio files will be concatenated into a single MP3 file.
+    6. If the --merge option is provided, the final MP3 file will be merged 
        with the input MP4 video file to create a new video file.
 
     Examples:
     python srt2mp3.py subtitles.srt
                     or
-    python str2mp3.py -M subtitles.srt video.mp4
+    python srt2mp3.py subtitles.srt -m video.mp4
+                    or
+    python srt2mp3.py -m -en subtitles.srt video.mp4
 
     Note:
     Ensure ffmpeg is installed and available in your system PATH.
@@ -244,26 +245,51 @@ def clear_screen():
         os.system("cls")
 
 
+def get_lang():
+    # Ottieni la lingua locale corrente
+    language_code, encoding = locale.getdefaultlocale()
+    if language_code:
+        # Estrai solo il codice della lingua (prima parte del codice)
+        language_code = language_code.split('_')[0]
+    return language_code
+
+
 def main():
-    input_video=""
-    srt_file_path=None
-    merge=False
+    language_codes = [
+        "af", "sq", "am", "ar", "hy", "as", "ay", "az", "ba", "eu", "bn", "dz",
+        "bh", "bi", "br", "bg", "my", "be", "km", "ca", "zh", "co", "hr", "cs",
+        "da", "nl", "en", "eo", "et", "fo", "fj", "fi", "fr", "fy", "gl", "ka",
+        "de", "el", "kl", "gn", "gu", "ha", "he", "hi", "hu", "is", "id", "ia",
+        "ie", "ga", "it", "ja", "jw", "kn", "ks", "kk", "rw", "ky", "rn", "ko",
+        "ku", "lo", "la", "lv", "ln", "lt", "mk", "mg", "ms", "ml", "mt", "mi",
+        "mr", "mo", "mn", "na", "ne", "no", "oc", "or", "om", "ps", "fa", "pl",
+        "pt", "pa", "qu", "rm", "ro", "ru", "sm", "sg", "sa", "sr", "sh", "st",
+        "tn", "sn", "sd", "si", "ss", "sk", "sl", "so", "es", "su", "sw", "sv",
+        "tl", "tg", "ta", "tt", "te", "th", "bo", "ti", "to", "ts", "tr", "tk",
+        "tw", "uk", "ur", "uz", "vi", "vo", "cy", "wo", "xh", "yi", "yo", "zu"
+    ]
+    my_lang =get_lang()
+    input_video = ""
+    srt_file_path = None
+    merge = False
     if len(sys.argv) < 2:
         show_help()
 
         sys.exit(1)
 
     for arg in sys.argv:
-        if arg =="-h" or arg=="--help":
+        if arg.upper() == "-H" or arg.upper() == "--HELP":
             show_help()
             sys.exit(0)
-        if arg.upper() == "-M" or arg=="--MERGE":
-            merge=True
+        if arg.upper() == "-M" or arg.upper() == "--MERGE":
+            merge = True
         if arg.endswith(".srt"):
             srt_file_path = arg
+        if  arg[1] == '-' and arg[-2:] in language_codes:
+            my_lang = arg
 
         if arg.endswith(".mp4"):
-            input_video=arg
+            input_video = arg
 
     if srt_file_path is None:
         clear_screen()
@@ -274,7 +300,7 @@ def main():
     print("Subtitles found in the SRT file:")
     fileslist=[]
     for i in range(len(subtitles)):
-        subtitle=subtitles[i]
+        subtitle = subtitles[i]
        # next_subtitle = subtitles[i+1] if i<len(subtitles)-1 else None
         prev_subtitle = subtitles[i-1] if i > 0 else None
         if prev_subtitle is not None:
@@ -306,8 +332,8 @@ def main():
         print("Progress..", f"{i}/{len(subtitles)}")
         #  subtitle=subtitles[1]
 
-        file_name = subtitle2mp3(subtitle)
-        adjust_mp3_playtime(file_name,subtitle.duration * 1)
+        file_name = subtitle2mp3(subtitle, my_lang)
+        adjust_mp3_playtime(file_name, subtitle.duration * 1)
 
         fileslist.append(file_name)
 

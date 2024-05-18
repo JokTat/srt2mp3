@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a18a05a-9e51-43b1-944e-84501f6b7b9e" name="Changes" comment=" Usage: python srt2mp3.py [options] &lt;input_file.srt&gt; &lt;input_file.mp4&gt;&#10;&#10;    Options:&#10;    -h, --help            Show this help message and exit.&#10;    -M, --merge           Merge the generated audio track with the input video.&#10;&#10;    Arguments:&#10;    &lt;input_file.srt&gt;      The subtitle file in SRT format.&#10;    &lt;input_file.mp4&gt;      The input video file in MP4 format.&#10;&#10;    Description:&#10;    This program processes an SRT subtitle file to generate corresponding &#10;    audio tracks, and optionally merges these audio tracks with an MP4 video file.&#10;&#10;    Steps:&#10;    1. Provide the SRT file and the MP4 video file as arguments.&#10;    2. The program will generate silent audio files for the durations between &#10;       subtitle entries.&#10;    3. The program will convert subtitle text to audio and adjust the duration.&#10;    4. All generated audio files will be concatenated into a single MP3 file.&#10;    5. If the --merge option is provided, the final MP3 file will be merged &#10;       with the input MP4 video file to create a new video file.&#10;&#10;    Examples:&#10;    python srt2mp3.py subtitles.srt&#10;                    or&#10;    python str2mp3.py -M subtitles.srt video.mp4&#10;&#10;    Note:&#10;    Ensure ffmpeg is installed and available in your system PATH.&#10;    &quot;&quot;&quot;" />
+    <list default="true" id="0a18a05a-9e51-43b1-944e-84501f6b7b9e" name="Changes" comment=" Usage: python srt2mp3.py [options] &lt;input_file.srt&gt; &lt;input_file.mp4&gt;&#10;&#10;    Options:&#10;    -h, --help            Show this help message and exit.&#10;    -M, --merge           Merge the generated audio track with the input video.&#10;&#10;    Arguments:&#10;    &lt;input_file.srt&gt;      The subtitle file in SRT format.&#10;    &lt;input_file.mp4&gt;      The input video file in MP4 format.&#10;&#10;    Description:&#10;    This program processes an SRT subtitle file to generate corresponding &#10;    audio tracks, and optionally merges these audio tracks with an MP4 video file.&#10;&#10;    Steps:&#10;    1. Provide the SRT file and the MP4 video file as arguments.&#10;    2. The program will generate silent audio files for the durations between &#10;       subtitle entries.&#10;    3. The program will convert subtitle text to audio and adjust the duration.&#10;    4. All generated audio files will be concatenated into a single MP3 file.&#10;    5. If the --merge option is provided, the final MP3 file will be merged &#10;       with the input MP4 video file to create a new video file.&#10;&#10;    Examples:&#10;    python srt2mp3.py subtitles.srt&#10;                    or&#10;    python str2mp3.py -M subtitles.srt video.mp4&#10;&#10;    Note:&#10;    Ensure ffmpeg is installed and available in your system PATH.&#10;    &quot;&quot;&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srt2mp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/srt2mp3.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JokTat&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JokTat/srt2mp3&quot;,
+    &quot;accountId&quot;: &quot;5872c49d-725f-4d5f-9b0b-c6e75863690a&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -118,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715977550087</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" Usage: python srt2mp3.py [options] &lt;input_file.srt&gt; &lt;input_file.mp4&gt;&#10;&#10;    Options:&#10;    -h, --help            Show this help message and exit.&#10;    -M, --merge           Merge the generated audio track with the input video.&#10;&#10;    Arguments:&#10;    &lt;input_file.srt&gt;      The subtitle file in SRT format.&#10;    &lt;input_file.mp4&gt;      The input video file in MP4 format.&#10;&#10;    Description:&#10;    This program processes an SRT subtitle file to generate corresponding &#10;    audio tracks, and optionally merges these audio tracks with an MP4 video file.&#10;&#10;    Steps:&#10;    1. Provide the SRT file and the MP4 video file as arguments.&#10;    2. The program will generate silent audio files for the durations between &#10;       subtitle entries.&#10;    3. The program will convert subtitle text to audio and adjust the duration.&#10;    4. All generated audio files will be concatenated into a single MP3 file.&#10;    5. If the --merge option is provided, the final MP3 file will be merged &#10;       with the input MP4 video file to create a new video file.&#10;&#10;    Examples:&#10;    python srt2mp3.py subtitles.srt&#10;                    or&#10;    python str2mp3.py -M subtitles.srt video.mp4&#10;&#10;    Note:&#10;    Ensure ffmpeg is installed and available in your system PATH.&#10;    &quot;&quot;&quot;">
+      <option name="closed" value="true" />
+      <created>1715977856679</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715977856679</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,13 +161,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/srt2mp3.py</url>
-          <line>241</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

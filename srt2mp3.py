@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import locale
 import sys
 import re
@@ -247,7 +248,7 @@ def clear_screen():
 
 def get_lang():
     # Ottieni la lingua locale corrente
-    language_code, encoding = locale.getdefaultlocale()
+    language_code, encoding = locale.getlocale()
     if language_code:
         # Estrai solo il codice della lingua (prima parte del codice)
         language_code = language_code.split('_')[0]
